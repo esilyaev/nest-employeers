@@ -1,8 +1,4 @@
-import {
-  BadRequestException,
-  Injectable,
-  NotFoundException,
-} from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import * as bcrypt from 'bcrypt';
 import { PrismaService } from 'src/prisma.service';
 import {
@@ -12,7 +8,6 @@ import {
 } from './consts/errors';
 import { CreateUserDto } from './dto/create-user.dto';
 import { LoginUserDto } from './dto/login-user.dto';
-import { UpdateUserDto } from './dto/update-user.dto';
 
 @Injectable()
 export class UserService {
@@ -53,10 +48,6 @@ export class UserService {
     return userData;
   }
 
-  findAll() {
-    return `This action returns all user`;
-  }
-
   async findOne(email: string) {
     const user = await this.prismaService.user.findFirst({
       where: { email },
@@ -67,13 +58,5 @@ export class UserService {
     }
 
     return user;
-  }
-
-  update(id: number, updateUserDto: UpdateUserDto) {
-    return `This action updates a #${id} user`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} user`;
   }
 }
