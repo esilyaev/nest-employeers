@@ -16,6 +16,7 @@ model User {
   name      String?
   password  String
   eployeers Employee[]
+  Company   Company[]
 }
 
 model Employee {
@@ -31,5 +32,7 @@ model Employee {
 model Company {
   id       String     @id @default(uuid())
   name     String
+  user     User       @relation(fields: [userId], references: [id])
+  userId   String
   employee Employee[]
 }
