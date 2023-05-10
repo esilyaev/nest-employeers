@@ -13,11 +13,10 @@ export class CompanyService {
   ) {}
 
   async create({ name }: CreateCompanyDto, userPayload: JwtPayload) {
-    const user = await this.userService.findOne(userPayload.email);
     const company = await this.prisma.company.create({
       data: {
         name,
-        user: { connect: { id: user.id } },
+        user: { connect: { id: userPayload.id } },
       },
     });
     return company;
